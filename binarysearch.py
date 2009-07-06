@@ -1,3 +1,7 @@
+
+# This is a correct binary search with a minimum number of comparisons in the loop
+# See blog post:
+#	http://www.iwebthereforeiam.com/iwebthereforeiam/2009/07/binary-search-coding-test.html
 def binarysearch(iter, val):
 	lo, hi = 0, len(iter)-1
 	while lo <= hi:
@@ -8,6 +12,7 @@ def binarysearch(iter, val):
 			lo = mid + 1
 	return (lo if iter[lo] == val else -1)
 
+# This is also correct but less efficient because it has an extra comparison
 def binarysearch2(iter, val):
 	lo, hi = 0, len(iter)-1
 	while lo <= hi:
@@ -20,6 +25,8 @@ def binarysearch2(iter, val):
 			lo = mid + 1
 	return -1
 
+# This driver does not necessarily still work.
+# Too much mucking with code.
 if __name__ == "__main__":
 	j, k = 0, 0 
 	#def test_search(arr, val):
