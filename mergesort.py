@@ -1,5 +1,5 @@
 # Inspired by thispost:
-#   http://lazypython.blogspot.com/2008_11_01_archive.html
+#   http://lazypython.blogspot.com/2008/11/timeline-view-in-django.html
 # Also of interest:
 #   http://wordaligned.org/articles/merging-sorted-streams-in-python
 
