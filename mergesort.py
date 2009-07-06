@@ -10,12 +10,13 @@ def merge(*querysets, **kwargs):
     if field is None:
         raise TypeError('you need to provide a key to do comparisons on')
     key = itemgetter(field)
+    # Assume the lists are not initially sorted
     qs = [sorted(x, key=key) for x in querysets]
     while len(qs) > 1:
-        q1, q2 = qs.pop(0), qs.pop(0)
-        q3 = merge_lists(q1, q2, key)
-        qs.append(q3)
-        # Or: qs.append(merge_lists(qs.pop(0), qs.pop(0), key))
+        #q1, q2 = qs.pop(0), qs.pop(0)
+        #q3 = merge_lists(q1, q2, key)
+        #qs.append(q3)
+        qs.append(merge_lists(qs.pop(0), qs.pop(0), key))
     return qs.pop()
 
 def merge_lists(left, right, key):
@@ -30,9 +31,9 @@ if __name__ == '__main__':
     b = [{'k':i, 'v':3*i} for i in range(10)]
     c = [{'k':i, 'v':5*i} for i in range(10)]
     d = [{'k':i, 'v':7*i} for i in range(10)]
-    query = (a, b, c, d)
-    d = {'field': 'v'}
-    result = merge(*query, **d)
-    for d in result:
-        print d
+    e = [{'k':i, 'v':11*i} for i in range(10)]
+    query = (a, b, c, d, e)
+    d = {'field' : 'v'}
+    for merged_dict in merge(*query, **d):
+        print merged_dict
 
