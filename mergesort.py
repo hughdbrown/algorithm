@@ -5,11 +5,14 @@
 
 from operator import itemgetter
 
-def merge(*querysets, **kwargs):
-    field = kwargs.pop('field')
-    if field is None:
-        raise TypeError('you need to provide a key to do comparisons on')
-    key = itemgetter(field)
+def merge(sort_field, *querysets, **kwargs):
+    def merge_lists(left, right, key):
+        result = []
+        while (len(left) and len(right)):
+            which_list = (left if key(left[0]) <= key(right[0]) else right)
+            result.append(which_list.pop(0))
+        return result + left + right
+    key = itemgetter(sort_field)
     # Assume the lists are not initially sorted
     qs = [sorted(x, key=key) for x in querysets]
     while len(qs) > 1:
@@ -19,13 +22,6 @@ def merge(*querysets, **kwargs):
         qs.append(merge_lists(qs.pop(0), qs.pop(0), key))
     return qs.pop()
 
-def merge_lists(left, right, key):
-    result = []
-    while (len(left) and len(right)):
-        which_list = (left if key(left[0]) <= key(right[0]) else right)
-        result.append(which_list.pop(0))
-    return result + left + right
-
 if __name__ == '__main__':
     a = [{'k':i, 'v':2*i} for i in range(10)]
     b = [{'k':i, 'v':3*i} for i in range(10)]
@@ -33,7 +29,6 @@ if __name__ == '__main__':
     d = [{'k':i, 'v':7*i} for i in range(10)]
     e = [{'k':i, 'v':11*i} for i in range(10)]
     query = (a, b, c, d, e)
-    d = {'field' : 'v'}
-    for merged_dict in merge(*query, **d):
+    for merged_dict in merge('v', *query):
         print merged_dict
 
