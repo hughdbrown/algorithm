@@ -6,15 +6,14 @@
 
 def multikeysort(items, columns):
     from operator import itemgetter
-    comparers = [ ((itemgetter(col[1:]), -1) if col.startswith('-') else (itemgetter(col), 1)) for col in columns]
+    comparers = [ ((itemgetter(col[1:].strip()), -1) if col.startswith('-') else (itemgetter(col.strip()), 1)) for col in columns]
     def sign(a, b):
         if   a < b:  return -1
         elif a > b:  return 1
         else:        return 0    
-    def comparer(self, other):
+    def comparer(left, right):
         for fn, mult in comparers:
-            self_val, other_val = fn(self), fn(other)
-            result = sign(self_val, other_val)
+            result = sign(fn(left), fn(right))
             if result:
                 return mult * result
         else:
