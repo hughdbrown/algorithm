@@ -11,18 +11,15 @@ def multikeysort(items, columns):
         if   a < b:  return -1
         elif a > b:  return 1
         else:        return 0    
-    class Comparer(object):
-        def __init__(self, item):
-            self.item = item
-        def __cmp__(self, other):
-            for fn, mult in comparers:
-                self_val, other_val = fn(self.item), fn(other.item)
-                result = sign(self_val, other_val)
-                if result:
-                    return mult * result
-            else:
-                return 0
-    return [s.item for s in sorted(Comparer(item) for item in items)]
+    def comparer(self, other):
+        for fn, mult in comparers:
+            self_val, other_val = fn(self), fn(other)
+            result = sign(self_val, other_val)
+            if result:
+                return mult * result
+        else:
+            return 0
+    return sorted(items, cmp=comparer)
 
 if __name__ == '__main__':    
     b = [{u'TOT_PTS_Misc': u'Utley, Alex', u'Total_Points': 96.0},
