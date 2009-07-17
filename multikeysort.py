@@ -7,10 +7,10 @@
 def multikeysort(items, columns):
     from operator import itemgetter
     comparers = [ ((itemgetter(col[1:].strip()), -1) if col.startswith('-') else (itemgetter(col.strip()), 1)) for col in columns]
-    def sign(a, b):
-        if   a < b:  return -1
-        elif a > b:  return 1
-        else:        return 0    
+    def sign(left, right):
+        if   left < right:  return -1
+        elif left > right:  return 1
+        else:               return 0    
     def comparer(left, right):
         for fn, mult in comparers:
             result = sign(fn(left), fn(right))
