@@ -1,3 +1,6 @@
+# I can't really claim much credit for this implementation.
+# I found this on the web and I converted it to use python generators.
+
 def queensproblem(solution, rows, columns):
     if len(solution) == rows:
         yield solution
