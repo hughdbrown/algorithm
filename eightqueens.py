@@ -11,13 +11,11 @@ def queensproblem(solution, rows, columns):
                     yield x
             else:
                 break
-    return
  
 def add_one_queen(new_row, columns, solution):
     for new_column in range(columns):
         if not conflict(new_row, new_column, solution):
             yield new_column
-    return
 
 def conflict(new_row, new_column, solution):
     return any(solution[row]       == new_column or
