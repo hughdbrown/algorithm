@@ -1,5 +1,7 @@
 # I can't really claim much credit for this implementation.
 # I found this on the web and I converted it to use python generators.
+# Adapted from:
+#     http://en.wikibooks.org/wiki/Algorithm_implementation/Miscellaneous/N-Queens
 
 def queensproblem(solution, rows, columns):
     def add_one_queen(new_row, columns, solution):
@@ -12,6 +14,7 @@ def queensproblem(solution, rows, columns):
                    solution[row] + row == new_column + new_row or
                    solution[row] - row == new_column - new_row
                    for row in range(new_row))
+
     if len(solution) == rows:
         yield solution
     else :
@@ -22,6 +25,6 @@ def queensproblem(solution, rows, columns):
             else:
                 break
  
-
-for i,solution in enumerate(queensproblem([], 8, 8)):
-    print i, solution
+if __name__== '__main__':
+    for i,solution in enumerate(queensproblem([], 8, 8)):
+        print i, solution
