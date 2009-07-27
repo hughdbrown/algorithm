@@ -1,12 +1,11 @@
 def queensproblem(solution, rows, columns):
     if len(solution) == rows:
-       yield solution
+        yield solution
     else :
-        max_row_so_far = len(solution)
-        for row in range(max_row_so_far, rows):
+        for row in range(len(solution), rows):
             for col in add_one_queen(row, columns, solution):
                 for x in queensproblem(solution + [col], rows, columns):
-                   yield x
+                    yield x
             else:
                 break
     return
@@ -23,6 +22,5 @@ def conflict(new_row, new_column, solution):
                solution[row] - row == new_column - new_row
                for row in range(new_row))
 
-solutions = []
-for i,solution in enumerate(queensproblem(solutions, 8, 8)):
+for i,solution in enumerate(queensproblem([], 8, 8)):
     print i, solution
