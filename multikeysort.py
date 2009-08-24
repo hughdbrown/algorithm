@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 
-# Classic Decorate-Sort-Undecorate
 # From an answer I posted to StackOverflow:
 #   http://stackoverflow.com/questions/1143671/python-sorting-list-of-dictionaries-by-multiple-keys/1144405
 
 def multikeysort(items, columns):
-    from operator import itemgetter
-    comparers = [ ((itemgetter(col[1:].strip()), -1) if col.startswith('-') else (itemgetter(col.strip()), 1)) for col in columns]
     def sign(left, right):
         if   left < right:  return -1
         elif left > right:  return 1
@@ -18,6 +15,8 @@ def multikeysort(items, columns):
                 return mult * result
         else:
             return 0
+    from operator import itemgetter
+    comparers = [ ((itemgetter(col[1:].strip()), -1) if col.startswith('-') else (itemgetter(col.strip()), 1)) for col in columns]
     return sorted(items, cmp=comparer)
 
 if __name__ == '__main__':    
