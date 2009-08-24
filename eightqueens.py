@@ -25,6 +25,6 @@ def queensproblem(solution, rows, columns):
             else:
                 break
  
-if __name__== '__main__':
+if __name__ == '__main__':
     for i,solution in enumerate(queensproblem([], 8, 8)):
         print i, solution
