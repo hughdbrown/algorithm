@@ -9,8 +9,7 @@ def merge(sort_field, *querysets, **kwargs):
     def merge_lists(left, right, key):
         result = []
         while (len(left) and len(right)):
-            which_list = (left if key(left[0]) <= key(right[0]) else right)
-            result.append(which_list.pop(0))
+            result.append((left if key(left[0]) <= key(right[0]) else right).pop(0))
         return result + left + right
     key = itemgetter(sort_field)
     # Assume the lists are not initially sorted
