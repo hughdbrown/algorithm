@@ -56,7 +56,6 @@ def dofile(filename):
                 print rawlines[lineno]
             print
     with open(filename) as f:
-        #rawlines = [line.rstrip() for line in f if len(line.rstrip())]
         rawlines = [line.rstrip() for line in f]
         lines_with_hashes = [(i, hashlib.md5(line).hexdigest(), line) for i, line in enumerate(rawlines)]
         lines_with_repeated_keys = repeatedkeys(lines_with_hashes)
