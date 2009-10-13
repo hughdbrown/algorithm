@@ -21,10 +21,10 @@ def rank(arr):
 	for i, v in enumerate(arr):
 		d[v].append(i)
 	result = [0] * len(arr)
-	i = 0
+	i = 1
 	for k in sorted(d, reverse = True):
 		for j in d[k]:
-			result[j] = i + 1
+			result[j] = i
 		i += len(d[k])
 	return result
 
